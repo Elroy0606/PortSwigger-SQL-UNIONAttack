@@ -29,8 +29,15 @@ This assessment was performed for educational purposes to demonstrate common web
 - Identify and exploit vulnerabilities
 - Demonstrate SQL injection techniques
 - Document findings and remediation steps
-
 ---
+
+## 2. Technincal Finding
+
+### Description 
+The website's filtering function in vulnerable to SQL injection because it fails to utilize parameterized queries or prepared statements. By manually injecting SQL payload into the URL parameters, i was able to extract sensitive data. While the initial scope was limited to determining the query's column count, I successfully leveraged the vulnerability to display the **Database Name** and **Database Version** directly on the webpage.
+
+
+
 
 
 
