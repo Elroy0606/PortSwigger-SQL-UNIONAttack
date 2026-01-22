@@ -112,3 +112,27 @@ Since we know the second column is vulnerable, we can use this to extract the da
     width="60%">
 </p>
 
+## 4. Technical Analysis
+The SQL Injection vulnerablity exists because
+- **No Input Validation:** The filter function accepts special SQL characters (',-- etc.)
+- **No Parameterized Queries:** Application uses string concatenation instead of prepared statements.
+
+## 5. Remediation recommendations
+
+To prevent this, the development team should implement the following:
+- **Use PreparedStatements:** This ensures the database treats the input as data only, not as executable code.
+- **Input Validation:** Whitelist allowed characters in username field (alphanumeric + underscore only). Reject inputs containing SQL keywords (SELECT, UNION, OR, --,etc.)
+
+---
+
+## 5. Conclusion
+This pentration test successfully identified a Critical Union-based SQL Injection Vulnerability within the PortSwigger lab's filter functionality. The assessment demonstrated that an attack can bypass input filters to manipulate backend queries, leading to  unauthorized diclosure of system metedata, including database name and version details.
+
+The vulnerability provides a foothold for further exploitation, such as full database schema extraction or unauthorized access to sensitive user data. Implementing parameterized queries and strict input validation is required to mitigate this risk. 
+
+
+### Summary
+- **Report Status:** Complete
+- **Severity Level:** High
+- **Remediation:** Timeline: Immediate
+
