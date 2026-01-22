@@ -57,7 +57,7 @@ Inject the ORDER BY clause into the vulnerable parameter to identify the number 
 <p align="center">
   <img src="screenshots/2.png" alt="ORDERBY payload"
     width="60%">
-</p>**
+</p>
 
 ```SQL
 ' ORDER BY 3--
