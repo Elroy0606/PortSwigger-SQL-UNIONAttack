@@ -36,8 +36,64 @@ This assessment was performed for educational purposes to demonstrate common web
 ### Description 
 The website's filtering function in vulnerable to SQL injection because it fails to utilize parameterized queries or prepared statements. By manually injecting SQL payload into the URL parameters, i was able to extract sensitive data. While the initial scope was limited to determining the query's column count, I successfully leveraged the vulnerability to display the **Database Name** and **Database Version** directly on the webpage.
 
+## 3. Steps to Reproduce
+
+### 1. Determine the Column Count
+Inject the ORDER BY clause into the vulnerable parameter to identify the number of columns being returned by the original query.
+
+```SQL
+' ORDER BY 1--
+```
+
+<p align="center">
+  <img src="screenshots/1.png" alt="ORDERBY payload"
+    width="60%">
+</p>
+
+**```SQL
+' ORDER BY 2--
+```
+
+<p align="center">
+  <img src="screenshots/2.png" alt="ORDERBY payload"
+    width="60%">
+</p>**
+
+```SQL
+' ORDER BY 3--
+```
+
+<p align="center">
+  <img src="screenshots/3.png" alt="ORDERBY payload"
+    width="60%">
+</p>
+
+```SQL
+' ORDER BY 4--
+```
+
+<p align="center">
+  <img src="screenshots/4.png" alt="ORDERBY payload"
+    width="60%">
+</p>
+
+**Result** 
+The error on the 4thh Column confirms that the query contains exactly **3 Column**
+
+### 2. Indentify the Suitable column for Data Extraction
+After confirming a 3-columm structure, I used a UNION SELECT attack to identify which column could render string data onto the webpage. I tested each column sequentially by replacing NULL with the string 'Test':
+- **Test 1:** ' UNION SELECT 'Test', NULL, NULL--
+Result: Error (Likely due to a data type mismatch, e.g., the column expects an Integer).
+- **Test 2:** ' UNION SELECT NULL,'Test', NULL--
+Result: Success. The word Test appeared on the webpage
+- **Test 3:** ' UNION SELECT NULL, NULL, 'Test'--
+Result: Error. (Likely due to a data type mismatch again)
+
+Only the second column is configured to display string data on the Web Page, making it the necessary injection point for extracting database information.
+
+### 3. Extract Database Metadata
+Since we know the second column is vulnerable, we can use this to extract the database version and name.
 
 
-
-
+ 
 
